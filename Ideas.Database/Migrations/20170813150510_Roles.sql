@@ -1,4 +1,4 @@
-﻿INSERT INTO [dbo].[AspNetRole]
+INSERT INTO [dbo].[AspNetRole]
 ([ConcurrencyStamp], [Name], [NormalizedName])
 VALUES
 (NEWID(), 'Admin', 'ADMIN'),

@@ -1,4 +1,4 @@
-﻿CREATE TABLE dbo.IdeaCategory
+CREATE TABLE dbo.IdeaCategory
 (
 	Id int NOT NULL IDENTITY,
 	Name nvarchar(50) NOT NULL,
@@ -6,7 +6,6 @@
 	CONSTRAINT PK_IdeaCategory PRIMARY KEY CLUSTERED (Id),
 	CONSTRAINT UQ_IdeaCategory_Name UNIQUE (Name)
 )
-
 
 CREATE TABLE dbo.IdeaSubcategory
 (

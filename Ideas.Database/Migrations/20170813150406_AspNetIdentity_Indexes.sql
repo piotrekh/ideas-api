@@ -1,4 +1,3 @@
-﻿
 CREATE UNIQUE INDEX [RoleNameIndex] ON [dbo].[AspNetRole] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
 
 GO
