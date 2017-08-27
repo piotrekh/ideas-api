@@ -28,18 +28,6 @@ namespace Ideas.DataAccess.EntitiesConfig.Identity
 
             builder.Property(x => x.UserName)
                 .HasMaxLength(256);
-
-            builder.HasMany(x => x.Claims)
-                   .WithOne()
-                   .HasForeignKey(x => x.UserId);
-
-            builder.HasMany(x => x.Logins)
-                   .WithOne()
-                   .HasForeignKey(x => x.UserId);
-
-            builder.HasMany(x => x.Roles)
-                   .WithOne()
-                   .HasForeignKey(x => x.UserId);
         }
     }
 }

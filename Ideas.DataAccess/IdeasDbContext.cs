@@ -3,6 +3,7 @@ using Ideas.DataAccess.Entities.Identity;
 using Ideas.DataAccess.EntitiesConfig;
 using Ideas.DataAccess.EntitiesConfig.Identity;
 using Ideas.DataAccess.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
