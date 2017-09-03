@@ -4,7 +4,7 @@
     {
         public string Server { get; set; }
 
-        public string Port { get; set; }
+        public int Port { get; set; }
 
         public bool UseSsl { get; set; }
         
