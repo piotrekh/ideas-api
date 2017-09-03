@@ -15,6 +15,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Ideas.Api.IoC;
 using Ideas.Api.Filters;
+using Ideas.Mailing;
 
 namespace Ideas.Api
 {
@@ -44,6 +45,8 @@ namespace Ideas.Api
             {
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             });
+
+            services.Configure<MailingSettings>(Configuration);
 
             //register mediator and all commands, queries, events and handlers from Domain assembly
             services.AddMediatR(Assembly.GetAssembly(typeof(CreateUser)));            

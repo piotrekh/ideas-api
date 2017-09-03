@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ideas.Domain\Ideas.Domain.csproj" />
+    <ProjectReference Include="..\Ideas.Mailing\Ideas.Mailing.csproj" />
   </ItemGroup>
 
 </Project>
