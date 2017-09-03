@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MediatR;
+using System.Reflection;
+using Ideas.Domain.Users.Commands;
+using Ideas.Domain.Users.Services;
 
 namespace Ideas.Api
 {
@@ -28,7 +32,15 @@ namespace Ideas.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(options =>
+                    {
+                        options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    });
+
+            services.AddMediatR(Assembly.GetAssembly(typeof(CreateUser)));
+
+            services.AddScoped<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
