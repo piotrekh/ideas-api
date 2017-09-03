@@ -11,6 +11,10 @@ using MediatR;
 using System.Reflection;
 using Ideas.Domain.Users.Commands;
 using Ideas.Domain.Users.Services;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Ideas.Api.IoC;
+using Ideas.Api.Filters;
 
 namespace Ideas.Api
 {
@@ -29,18 +33,35 @@ namespace Ideas.Api
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc()
-                    .AddJsonOptions(options =>
-                    {
-                        options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-                    });
+            services.AddMvc(options =>
+            {
+                options.Filters.AddGlobalExceptionFilters();
+            })
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            });
 
-            services.AddMediatR(Assembly.GetAssembly(typeof(CreateUser)));
+            //register mediator and all commands, queries, events and handlers from Domain assembly
+            services.AddMediatR(Assembly.GetAssembly(typeof(CreateUser)));            
 
-            services.AddScoped<IUsersService, UsersService>();
+            //create autofac container builder
+            var builder = new ContainerBuilder();
+
+            //register autofac modules
+            builder.RegisterModule<DomainServicesModule>();
+
+            //populate autofac container with Asp.Net dependencies
+            builder.Populate(services);
+
+            //create autofac container and service provider
+            var container = builder.Build();
+            var serviceProvider = new AutofacServiceProvider(container);
+
+            return serviceProvider;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
