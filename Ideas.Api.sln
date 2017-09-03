@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.Api", "Ideas.Api\Ideas.Api.csproj", "{AA39B9D3-DA43-4C01-B5E8-54BC4E628EF5}"
 EndProject
@@ -9,15 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{7CA4837F-9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF642D6E-344E-470E-8F01-19CACE1ED9C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.Domain", "Ideas.Domain\Ideas.Domain.csproj", "{8B19C210-C85D-4577-9512-8CC1630C8E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.Domain", "Ideas.Domain\Ideas.Domain.csproj", "{8B19C210-C85D-4577-9512-8CC1630C8E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.DataAccess", "Ideas.DataAccess\Ideas.DataAccess.csproj", "{D44F8EC5-2E7A-4431-91B6-9CBE1B0E7E12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.DataAccess", "Ideas.DataAccess\Ideas.DataAccess.csproj", "{D44F8EC5-2E7A-4431-91B6-9CBE1B0E7E12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.Database", "Ideas.Database\Ideas.Database.csproj", "{FEE18469-FA2C-421F-8B2C-7C5AC278DAAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.Database", "Ideas.Database\Ideas.Database.csproj", "{FEE18469-FA2C-421F-8B2C-7C5AC278DAAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.TestData", "Ideas.TestData\Ideas.TestData.csproj", "{84C6AF5F-6BA6-4773-B30B-6F7A5AF6C0E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.TestData", "Ideas.TestData\Ideas.TestData.csproj", "{84C6AF5F-6BA6-4773-B30B-6F7A5AF6C0E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.UnitTests", "Ideas.UnitTests\Ideas.UnitTests.csproj", "{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.UnitTests", "Ideas.UnitTests\Ideas.UnitTests.csproj", "{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.Mailing", "Ideas.Mailing\Ideas.Mailing.csproj", "{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +63,8 @@ Global
 		{FEE18469-FA2C-421F-8B2C-7C5AC278DAAC} = {7CA4837F-90AB-4477-8EF9-F1E055A1926B}
 		{84C6AF5F-6BA6-4773-B30B-6F7A5AF6C0E6} = {7CA4837F-90AB-4477-8EF9-F1E055A1926B}
 		{621E37F8-14C2-446D-A7CD-7BFBD1873B3A} = {DF642D6E-344E-470E-8F01-19CACE1ED9C7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4360FC22-FCD5-4BB9-8F82-390AD61B225C}
 	EndGlobalSection
 EndGlobal
