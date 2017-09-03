@@ -16,6 +16,7 @@ using Autofac.Extensions.DependencyInjection;
 using Ideas.Api.IoC;
 using Ideas.Api.Filters;
 using Ideas.Mailing;
+using Ideas.Mailing.EventHandlers;
 
 namespace Ideas.Api
 {
@@ -48,14 +49,16 @@ namespace Ideas.Api
 
             services.Configure<MailingSettings>(Configuration);
 
-            //register mediator and all commands, queries, events and handlers from Domain assembly
-            services.AddMediatR(Assembly.GetAssembly(typeof(CreateUser)));            
+            //register mediator and all commands, queries, events and handlers from assemblies
+            services.AddMediatR(typeof(CreateUser).Assembly, //domain
+                                typeof(EmailCreatedUser).Assembly); //mailing          
 
             //create autofac container builder
             var builder = new ContainerBuilder();
 
             //register autofac modules
             builder.RegisterModule<DomainServicesModule>();
+            builder.RegisterModule<MailingModule>();
 
             //populate autofac container with Asp.Net dependencies
             builder.Populate(services);

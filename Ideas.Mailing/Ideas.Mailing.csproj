@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EventHandlers\" />
+    <PackageReference Include="MailKit" Version="1.18.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="1.18.0" />
+    <ProjectReference Include="..\Ideas.DataAccess\Ideas.DataAccess.csproj" />
+    <ProjectReference Include="..\Ideas.Domain\Ideas.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,5 +9,7 @@ namespace Ideas.Domain.Users.Services
         Task<User> FindByEmail(string email);
 
         Task<IdentityResult> Create(User user);
+
+        Task<string> GeneratePasswordResetToken(User user);
     }
 }

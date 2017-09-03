@@ -22,5 +22,10 @@ namespace Ideas.Domain.Users.Services
         {
             return _userManager.CreateAsync(user);
         }
+
+        public Task<string> GeneratePasswordResetToken(User user)
+        {
+            return _userManager.GeneratePasswordResetTokenAsync(user);
+        }
     }
 }

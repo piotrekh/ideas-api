@@ -1,11 +1,10 @@
 ﻿using Autofac.Builder;
-using Autofac.Features.Scanning;
 
 namespace Ideas.Api.Extensions
 {
     public static class AutofacExtensions
     {
-        public static IRegistrationBuilder<TLimit, ScanningActivatorData, DynamicRegistrationStyle> InstancePerAspNetCoreRequest<TLimit>(this IRegistrationBuilder<TLimit, ScanningActivatorData, DynamicRegistrationStyle> registrationBuilder)
+        public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> InstancePerAspNetCoreRequest<TLimit, TActivatorData, TRegistrationStyle>(this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registrationBuilder)
         {
             // when using Autofac in Asp.Net Core we need to use
             // InstancePerLifetimeScope instead of InstancePerRequest
