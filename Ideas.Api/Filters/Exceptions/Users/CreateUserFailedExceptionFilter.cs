@@ -1,4 +1,5 @@
 ﻿using Ideas.Api.Models;
+using Ideas.Domain.Users.Exceptions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
@@ -8,7 +9,11 @@ namespace Ideas.Api.Filters.Exceptions.Users
     {
         public void OnException(ExceptionContext context)
         {
-            context.Result = new ErrorResult(Error.CreateUserFailed, context.Exception.Message, HttpStatusCode.ExpectationFailed);
+            if (context.Exception is CreateUserFailedException)
+            {
+                context.Result = new ErrorResult(Error.CreateUserFailed, context.Exception.Message, HttpStatusCode.ExpectationFailed);
+                context.ExceptionHandled = true;
+            }
         }
     }
 }
