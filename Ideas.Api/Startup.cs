@@ -128,6 +128,7 @@ namespace Ideas.Api
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseCors("CorsPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
