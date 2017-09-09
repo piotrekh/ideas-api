@@ -7,7 +7,8 @@ using Commands = Ideas.Domain.Users.Commands;
 
 namespace Ideas.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;

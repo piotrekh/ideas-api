@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Ideas.Api.Filters;
 using Ideas.Api.IoC;
+using Ideas.Api.Swagger.Filters;
 using Ideas.DataAccess;
 using Ideas.DataAccess.Entities.Identity;
 using Ideas.Domain.Users.Commands;
@@ -11,12 +12,15 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Linq;
 
 namespace Ideas.Api
 {
@@ -37,48 +41,81 @@ namespace Ideas.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc(options =>
-            {
-                options.Filters.AddGlobalExceptionFilters();
-            })
-            .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-            });
+            services.Configure<MailingSettings>(Configuration);
 
             services.AddDbContext<IdeasDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdeasDb")));
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<IdeasDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.Configure<MailingSettings>(Configuration);
+                .AddDefaultTokenProviders();                       
 
             //register mediator and all commands, queries, events and handlers from assemblies
             services.AddMediatR(typeof(CreateUser).Assembly, //domain
                                 typeof(EmailCreatedUser).Assembly); //mailing  
 
+            // Add framework services.
+            services.AddMvc(options =>
+            {
+                options.Filters.AddGlobalExceptionFilters();
+                options.Filters.Add(new ProducesAttribute("application/json"));
+                options.Filters.Add(new ConsumesAttribute("application/json"));
+            })
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
+            services.AddApiVersioning(cfg =>
+            {
+                cfg.AssumeDefaultVersionWhenUnspecified = true;
+                cfg.DefaultApiVersion = new ApiVersion(1, 0);
+                cfg.ReportApiVersions = true;
+            });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Ideas API", Version = "v1" });
+                c.SwaggerDoc("v1.0", new Info { Title = "Ideas API", Version = "v1.0" });
 
-                c.DescribeAllEnumsAsStrings();                
+                c.DescribeAllEnumsAsStrings();
+
+                c.DocInclusionPredicate((version, apiDesc) =>
+                {
+                    var actionVersions = apiDesc.ActionAttributes().OfType<MapToApiVersionAttribute>().SelectMany(attr => attr.Versions);
+                    var controllerVersions = apiDesc.ControllerAttributes().OfType<ApiVersionAttribute>().SelectMany(attr => attr.Versions);
+
+                    var controllerAndActionVersionsOverlap = controllerVersions.Intersect(actionVersions).Any();
+                    if (controllerAndActionVersionsOverlap)
+                    {
+                        return actionVersions.Any(v => $"v{v.ToString()}" == version);
+                    }
+                    return controllerVersions.Any(v => $"v{v.ToString()}" == version);
+                });
+
+                c.OperationFilter<RemoveVersionParametersFilter>();
+                c.DocumentFilter<SetVersionInPathsFilter>();
             });
 
             //create autofac container builder
-            var builder = new ContainerBuilder();
+            var containerBuilder = new ContainerBuilder();
 
             //register autofac modules
-            builder.RegisterModule<DomainServicesModule>();
-            builder.RegisterModule<MailingModule>();
+            containerBuilder.RegisterModule<DomainServicesModule>();
+            containerBuilder.RegisterModule<MailingModule>();
 
             //populate autofac container with Asp.Net dependencies
-            builder.Populate(services);
+            containerBuilder.Populate(services);
 
             //create autofac container and service provider
-            var container = builder.Build();
+            var container = containerBuilder.Build();
             var serviceProvider = new AutofacServiceProvider(container);
 
             return serviceProvider;
@@ -95,7 +132,7 @@ namespace Ideas.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ideas API v1");
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Ideas API v1.0");
                 c.ShowRequestHeaders();
                 c.ShowJsonEditor();                
             });
