@@ -1,7 +1,6 @@
-﻿using MailKit.Net.Smtp;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Options;
+using System.Net;
+using System.Net.Mail;
 
 namespace Ideas.Mailing
 {
@@ -14,20 +13,18 @@ namespace Ideas.Mailing
             _settings = settings.Value;
         }
 
-        public async Task Send(MimeMessage message)
+        public void Send(string recipient, string subject, string body)
         {
-            using (var smtp = new SmtpClient())
-            {
-                await smtp.ConnectAsync(_settings.Server, _settings.Port, _settings.UseSsl);
+            SmtpClient client = new SmtpClient(_settings.Server, _settings.Port);
+            client.UseDefaultCredentials = false;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new NetworkCredential(_settings.Username, _settings.Password);
+            client.EnableSsl = true;
 
-                // Note: since we don't have an OAuth2 token, disable
-                // the XOAUTH2 authentication mechanism.
-                smtp.AuthenticationMechanisms.Remove("XOAUTH2");
-
-                await smtp.AuthenticateAsync(_settings.Username, _settings.Password);
-                await smtp.SendAsync(message);
-                await smtp.DisconnectAsync(true);
-            }
+            MailMessage mailMessage = new MailMessage(_settings.Username, recipient);
+            mailMessage.Subject = subject;
+            mailMessage.Body = body;
+            client.Send(mailMessage);
         }
     }
 }

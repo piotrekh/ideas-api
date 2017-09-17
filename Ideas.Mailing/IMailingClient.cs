@@ -1,10 +1,9 @@
-﻿using MimeKit;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Ideas.Mailing
 {
     public interface IMailingClient
     {
-        Task Send(MimeMessage message);
+        void Send(string recipient, string subject, string body);
     }
 }

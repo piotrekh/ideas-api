@@ -1,5 +1,8 @@
 ﻿using Ideas.DataAccess.Entities.Identity;
+using Ideas.Domain.Common.Enums;
+using Ideas.Domain.Users.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ideas.Domain.Users.Services
@@ -18,9 +21,13 @@ namespace Ideas.Domain.Users.Services
             return _userManager.FindByEmailAsync(email);
         }
 
-        public Task<IdentityResult> Create(User user)
+        public async Task Create(User user, RoleName role)
         {
-            return _userManager.CreateAsync(user);
+            var creationResult = await _userManager.CreateAsync(user);
+            if (!creationResult.Succeeded)
+                throw new CreateUserFailedException(creationResult.Errors.FirstOrDefault()?.Description);
+
+            await _userManager.AddToRoleAsync(user, role.ToString());
         }
 
         public Task<string> GeneratePasswordResetToken(User user)

@@ -22,8 +22,8 @@ namespace Ideas.Domain.Users.CommandHandlers
         }
 
         public async Task Handle(CreateUser message)
-        {
-            var existingUser = _usersService.FindByEmail(message.Email);
+        {            
+            var existingUser = await _usersService.FindByEmail(message.Email);
             if (existingUser != null)
                 throw new UserAlreadyExistsException();
 
@@ -34,11 +34,9 @@ namespace Ideas.Domain.Users.CommandHandlers
                 FirstName = message.FirstName,
                 LastName = message.LastName
             };
-            
-            var result = await _usersService.Create(user);
-            if (!result.Succeeded)
-                throw new CreateUserFailedException(result.Errors.FirstOrDefault()?.Description);
 
+            await _usersService.Create(user, message.Role);
+            
             await _mediator.Publish(new UserCreated() { User = user });
         }
     }

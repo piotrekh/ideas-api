@@ -1,5 +1,5 @@
 ﻿using Ideas.DataAccess.Entities.Identity;
-using Microsoft.AspNetCore.Identity;
+using Ideas.Domain.Common.Enums;
 using System.Threading.Tasks;
 
 namespace Ideas.Domain.Users.Services
@@ -8,7 +8,7 @@ namespace Ideas.Domain.Users.Services
     {
         Task<User> FindByEmail(string email);
 
-        Task<IdentityResult> Create(User user);
+        Task Create(User user, RoleName role);
 
         Task<string> GeneratePasswordResetToken(User user);
     }

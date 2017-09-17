@@ -33,6 +33,9 @@ namespace Ideas.Api
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            builder.AddUserSecrets<Startup>();
+
             Configuration = builder.Build();
         }
 
@@ -41,14 +44,23 @@ namespace Ideas.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.Configure<MailingSettings>(Configuration);
+            services.AddOptions();
+            services.Configure<MailingSettings>(Configuration.GetSection("Mailing"));
 
             services.AddDbContext<IdeasDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdeasDb")));
 
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<IdeasDbContext>()
-                .AddDefaultTokenProviders();                       
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;                
+            })
+            .AddEntityFrameworkStores<IdeasDbContext>()
+            .AddDefaultTokenProviders();                       
 
             //register mediator and all commands, queries, events and handlers from assemblies
             services.AddMediatR(typeof(CreateUser).Assembly, //domain
@@ -108,6 +120,7 @@ namespace Ideas.Api
             var containerBuilder = new ContainerBuilder();
 
             //register autofac modules
+            containerBuilder.RegisterModule<DataAccessModule>();
             containerBuilder.RegisterModule<DomainServicesModule>();
             containerBuilder.RegisterModule<MailingModule>();
 
@@ -138,5 +151,12 @@ namespace Ideas.Api
                 c.ShowJsonEditor();                
             });
         }
+    }
+
+    public class TestSettings
+    {
+        public string Text { get; set; }
+
+        public int Value { get; set; }
     }
 }

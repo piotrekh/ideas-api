@@ -1,7 +1,6 @@
 ﻿using Ideas.Domain.Users.Events;
 using Ideas.Domain.Users.Services;
 using MediatR;
-using MimeKit;
 using System.Threading.Tasks;
 
 namespace Ideas.Mailing.EventHandlers
@@ -21,17 +20,12 @@ namespace Ideas.Mailing.EventHandlers
         public async Task Handle(UserCreated notification)
         {
             var passwordToken = await _usersService.GeneratePasswordResetToken(notification.User);
+            
+            string subject = "You have been invited to Ideas";
+            //TODO: Email an url with password reset token to allow user to set his password and login to system
+            string body = $"Hi {notification.User.FirstName} {notification.User.LastName}, you have been invited to Ideas. This is your password token: {passwordToken}";
 
-            var message = new MimeMessage();
-            message.To.Add(new MailboxAddress(notification.User.Email));
-            message.Subject = "You have been invited to Ideas";
-            message.Body = new TextPart("plain")
-            {
-                //TODO: Email an url with password reset token to allow user to set his password and login to system
-                Text = $"Hi {notification.User.FirstName} {notification.User.LastName}, you have been invited to Ideas. This is your password token: {passwordToken}"
-            };
-
-            await _mailingClient.Send(message);
+            _mailingClient.Send(notification.User.Email, subject, body);
         }
     }
 }
