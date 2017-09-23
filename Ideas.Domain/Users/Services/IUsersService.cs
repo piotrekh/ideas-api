@@ -11,5 +11,7 @@ namespace Ideas.Domain.Users.Services
         Task Create(User user, RoleName role);
 
         Task<string> GeneratePasswordResetToken(User user);
+
+        Task ResetPassword(User user, string token, string newPassword);
     }
 }

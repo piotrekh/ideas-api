@@ -9,7 +9,8 @@ namespace Ideas.Api.Filters
         {
             //Users
             filterCollection.Add<CreateUserFailedExceptionFilter>();
-            filterCollection.Add<UserAlreadyExistsExceptionFilter>();            
+            filterCollection.Add<UserAlreadyExistsExceptionFilter>();
+            filterCollection.Add<ResetPasswordFailedExceptionFilter>();
         }
     }
 }

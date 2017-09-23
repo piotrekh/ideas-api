@@ -3,6 +3,7 @@
     public enum Error
     {
         UserAlreadyExists,
-        CreateUserFailed
+        CreateUserFailed,
+        ResetPasswordFailed
     }
 }

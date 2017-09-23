@@ -11,5 +11,5 @@ namespace Ideas.Api.Models.Users
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-    }
+    }    
 }

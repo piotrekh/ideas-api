@@ -1,4 +1,5 @@
-﻿using Ideas.Api.Models.Users;
+﻿using AutoMapper;
+using Ideas.Api.Models.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -12,23 +13,36 @@ namespace Ideas.Api.Controllers
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator,
+            IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
+        /// <summary>
+        /// Creates a new user, sending them a confirmation link
+        /// </summary>
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> CreateUser([FromBody] CreateUser user)
         {
-            Commands.CreateUser command = new Commands.CreateUser()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Role = user.Role
-            };
+            var command = _mapper.Map<Commands.CreateUser>(user);
+
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Sets user password and activates account
+        /// </summary>
+        [HttpPut("activation")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> ActivateUser(ActivateUser activation)
+        {
+            var command = _mapper.Map<Commands.ActivateUser>(activation);
 
             await _mediator.Send(command);
             return NoContent();

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Ideas.Api.Filters;
 using Ideas.Api.IoC;
 using Ideas.Api.Swagger.Filters;
@@ -65,6 +66,8 @@ namespace Ideas.Api
             //register mediator and all commands, queries, events and handlers from assemblies
             services.AddMediatR(typeof(CreateUser).Assembly, //domain
                                 typeof(EmailCreatedUser).Assembly); //mailing  
+
+            services.AddAutoMapper();
 
             // Add framework services.
             services.AddMvc(options =>

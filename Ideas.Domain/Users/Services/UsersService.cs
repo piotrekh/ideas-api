@@ -34,5 +34,12 @@ namespace Ideas.Domain.Users.Services
         {
             return _userManager.GeneratePasswordResetTokenAsync(user);
         }
+
+        public async Task ResetPassword(User user, string token, string newPassword)
+        {
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            if (!result.Succeeded)
+                throw new ResetPasswordFailedException(result.Errors.FirstOrDefault()?.Description);
+        }
     }
 }
