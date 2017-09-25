@@ -19,6 +19,11 @@ namespace Ideas.DataAccess
 
         public DbSet<AssignedIdeaSubcategory> AssignedIdeaSubcategories { get; set; }
 
+        public DbSet<ApiClient> ApiClients { get; set; }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+
         public IdeasDbContext(DbContextOptions<IdeasDbContext> options) : base(options)
         {
         }
@@ -39,6 +44,8 @@ namespace Ideas.DataAccess
             builder.AddConfiguration<IdeaSubcategory, IdeaSubcategoryConfig>();
             builder.AddConfiguration<Idea, IdeaConfig>();
             builder.AddConfiguration<AssignedIdeaSubcategory, AssignedIdeaSubcategoryConfig>();
+            builder.AddConfiguration<ApiClient, ApiClientConfig>();
+            builder.AddConfiguration<RefreshToken, RefreshTokenConfig>();
         }
     }
 }

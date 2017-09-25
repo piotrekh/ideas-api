@@ -16,6 +16,10 @@ namespace Ideas.DataAccess
 
         public DbSet<AssignedIdeaSubcategory> AssignedIdeaSubcategories => _dbContext.AssignedIdeaSubcategories;
 
+        public DbSet<ApiClient> ApiClients => _dbContext.ApiClients;
+
+        public DbSet<RefreshToken> RefreshTokens => _dbContext.RefreshTokens;
+
 
         public UnitOfWork(IdeasDbContext dbContext)
         {

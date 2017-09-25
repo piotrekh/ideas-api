@@ -14,6 +14,10 @@ namespace Ideas.DataAccess
 
         DbSet<AssignedIdeaSubcategory> AssignedIdeaSubcategories { get; }
 
+        DbSet<ApiClient> ApiClients { get; }
+
+        DbSet<RefreshToken> RefreshTokens { get; }
+
 
         ITransaction BeginTransaction();
 

@@ -6,6 +6,7 @@ using Ideas.Api.IoC;
 using Ideas.Api.Swagger.Filters;
 using Ideas.DataAccess;
 using Ideas.DataAccess.Entities.Identity;
+using Ideas.Domain.Settings;
 using Ideas.Domain.Users.Commands;
 using Ideas.Mailing;
 using Ideas.Mailing.EventHandlers;
@@ -47,6 +48,7 @@ namespace Ideas.Api
         {
             services.AddOptions();
             services.Configure<MailingSettings>(Configuration.GetSection("Mailing"));
+            services.Configure<AuthSettings>(Configuration.GetSection("AuthSettings"));
 
             services.AddDbContext<IdeasDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdeasDb")));

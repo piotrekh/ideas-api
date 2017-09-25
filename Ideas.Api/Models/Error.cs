@@ -4,6 +4,11 @@
     {
         UserAlreadyExists,
         CreateUserFailed,
-        ResetPasswordFailed
+        ResetPasswordFailed,
+        EmailUnconfirmed,
+        InvalidClientId,
+        LoginFailed,
+        InvalidRefreshToken,
+        InvalidGrantType
     }
 }
