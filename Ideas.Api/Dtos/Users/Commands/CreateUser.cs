@@ -1,6 +1,6 @@
 ﻿using Ideas.Domain.Common.Enums;
 
-namespace Ideas.Api.Models.Users
+namespace Ideas.Api.Dtos.Users.Commands
 {
     public class CreateUser
     {
@@ -11,5 +11,5 @@ namespace Ideas.Api.Models.Users
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-    }    
+    }
 }

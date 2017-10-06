@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ideas.Api.Models.Users;
+using Ideas.Api.Dtos.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -40,7 +40,7 @@ namespace Ideas.Api.Controllers
         /// </summary>
         [HttpPut("activation")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> ActivateUser(ActivateUser activation)
+        public async Task<IActionResult> ActivateUser([FromBody] ActivateUser activation)
         {
             var command = _mapper.Map<Commands.ActivateUser>(activation);
 

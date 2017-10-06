@@ -31,19 +31,20 @@ namespace Ideas.Domain.Users.CommandHandlers
             if (client == null)
                 throw new InvalidClientIdException();
 
-            //check if the access token exists in database
+            //check if the access token exists in database and if it hasn't expired yet
             var token = _uow.RefreshTokens.Include(x => x.User)
                 .Include(x => x.Client)
                 .Where(x => x.Token == message.RefreshToken)
                 .Select(x => new
                 {
                     Token = x.Token,
+                    ExpirationDate = x.ExpirationDate,
                     User = x.User,
                     ClientId = x.ApiClientId,
                     ClientExternalId = x.Client.ExternalId
                 })
                 .FirstOrDefault();
-            if (token == null)
+            if (token == null || token.ExpirationDate <= DateTime.UtcNow)
                 throw new InvalidRefreshTokenException();
 
             //check if the given client id matches the id saved in database for the refresh token
@@ -54,9 +55,13 @@ namespace Ideas.Domain.Users.CommandHandlers
             var accessToken = await _mediator.Send(new GenerateAuthenticationTokens()
             {
                 Client = client,
-                RefreshToken = message.RefreshToken,
                 User = token.User
             });
+
+            //delete the old refresh token
+            _uow.BatchDelete(_uow.RefreshTokens.Where(x => x.Token == message.RefreshToken));
+            _uow.SaveChanges();
+
             return accessToken;
         }
     }

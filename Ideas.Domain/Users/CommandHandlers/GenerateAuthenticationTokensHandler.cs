@@ -54,12 +54,13 @@ namespace Ideas.Domain.Users.CommandHandlers
             foreach (var claim in complexClaims)
                 token.Payload.Add(claim.Key, claim.Value);
 
-            Guid refreshToken = message.RefreshToken == null ? GenerateRefreshToken(message.User, message.Client.Id) : message.RefreshToken.GetValueOrDefault();
+            //generate a new refresh token
+            Guid refreshToken = GenerateRefreshToken(message.User, message.Client.Id);
 
             return new AuthenticationToken()
             {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresIn = new DateTimeOffset(token.ValidTo).ToUniversalTime().ToUnixTimeSeconds(),
+                ExpiresIn = _authSettings.TokenExpiration * 60,
                 TokenType = "Bearer",
                 RefreshToken = refreshToken
             };
@@ -73,6 +74,7 @@ namespace Ideas.Domain.Users.CommandHandlers
                 AspNetUserId = user.Id,
                 IssueDate = DateTime.UtcNow,
                 Token = Guid.NewGuid(),
+                ExpirationDate = DateTime.UtcNow.AddMinutes(_authSettings.RefreshTokenExpiration)
             };
             _uow.RefreshTokens.Add(tokenEntity);
             _uow.SaveChanges();

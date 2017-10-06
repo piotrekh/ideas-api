@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ideas.Api.Models.Users
+namespace Ideas.Api.Dtos.Users.Models
 {
     public class AuthenticationToken
     {

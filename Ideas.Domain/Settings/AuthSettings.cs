@@ -8,6 +8,14 @@
 
         public string SecurityKey { get; set; }
 
-        public double TokenExpiration { get; set; }
+        /// <summary>
+        /// In minutes
+        /// </summary>
+        public int TokenExpiration { get; set; }
+
+        /// <summary>
+        /// In minutes
+        /// </summary>
+        public int RefreshTokenExpiration { get; set; }
     }
 }

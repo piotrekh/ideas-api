@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
+using Ideas.Api.Dtos.Users.Models;
 using Ideas.Api.Exceptions;
-using Ideas.Api.Models.Users;
 using Ideas.Domain.Common.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Commands = Ideas.Domain.Users.Commands;

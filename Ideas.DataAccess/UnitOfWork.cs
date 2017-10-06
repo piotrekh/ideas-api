@@ -1,6 +1,8 @@
 ﻿using Ideas.DataAccess.Entities;
 using Ideas.DataAccess.Transactions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Z.EntityFramework.Plus;
 
 namespace Ideas.DataAccess
 {
@@ -29,6 +31,16 @@ namespace Ideas.DataAccess
         public void SaveChanges()
         {
             _dbContext.SaveChanges();
+        }
+
+        //We need to have a separate batch delete method on unit of work instead of
+        //directly using Z.EntityFramework.Plus Delete() extension method because
+        //the library doesn't work properly with EF Core in memory db with separate
+        //service provider for each new DbContext instance. This way we will be able
+        //to override this method in in memory unit of work implementation.        
+        public virtual void BatchDelete<T>(IQueryable<T> query) where T : class
+        {
+            query.Delete();
         }
 
         public virtual ITransaction BeginTransaction()

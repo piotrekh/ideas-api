@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.Api", "Ideas.Api\Ideas.Api.csproj", "{AA39B9D3-DA43-4C01-B5E8-54BC4E628EF5}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.TestData", "Ideas.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.UnitTests", "Ideas.UnitTests\Ideas.UnitTests.csproj", "{621E37F8-14C2-446D-A7CD-7BFBD1873B3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ideas.Mailing", "Ideas.Mailing\Ideas.Mailing.csproj", "{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ideas.Mailing", "Ideas.Mailing\Ideas.Mailing.csproj", "{7982DE4B-53EA-4E02-ADD8-09EB91EA2CBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

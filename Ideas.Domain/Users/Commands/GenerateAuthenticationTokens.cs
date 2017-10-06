@@ -11,7 +11,5 @@ namespace Ideas.Domain.Users.Commands
         public User User { get; set; }
 
         public ApiClient Client { get; set; }
-
-        public Guid? RefreshToken { get; set; }
     }
 }

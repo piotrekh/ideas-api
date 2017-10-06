@@ -15,6 +15,8 @@ namespace Ideas.DataAccess.Entities
 
         public DateTime IssueDate { get; set; }
 
+        public DateTime ExpirationDate { get; set; }
+
 
         public virtual ApiClient Client { get; set; }
 

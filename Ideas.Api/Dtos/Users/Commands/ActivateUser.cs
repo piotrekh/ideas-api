@@ -1,4 +1,4 @@
-﻿namespace Ideas.Api.Models.Users
+﻿namespace Ideas.Api.Dtos.Users.Commands
 {
     public class ActivateUser
     {
