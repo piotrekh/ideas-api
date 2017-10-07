@@ -6,7 +6,7 @@ namespace Ideas.UnitTests
 {
     public class MappingsTest
     {
-        [Fact]
+        [Fact(DisplayName = "Mappings")]
         public void DomainMappings_Should_BeValid()
         {
             IMapper mapper = MapperFactory.CreateMapper();

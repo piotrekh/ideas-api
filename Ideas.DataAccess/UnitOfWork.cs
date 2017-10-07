@@ -8,7 +8,7 @@ namespace Ideas.DataAccess
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IdeasDbContext _dbContext;
+        protected readonly IdeasDbContext _dbContext;
 
         public DbSet<IdeaCategory> IdeaCategories => _dbContext.IdeaCategories;
 
