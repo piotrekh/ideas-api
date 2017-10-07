@@ -3,7 +3,7 @@ using Ideas.Domain.Authorization.Exceptions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace Ideas.Api.Filters.Exceptions.Users
+namespace Ideas.Api.Filters.Exceptions.Authorization
 {
     public class LoginFailedExceptionFilter : IExceptionFilter
     {

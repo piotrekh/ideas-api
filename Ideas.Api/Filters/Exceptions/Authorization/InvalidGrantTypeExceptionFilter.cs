@@ -1,9 +1,9 @@
-﻿using Ideas.Api.Exceptions;
-using Ideas.Api.Models;
+﻿using Ideas.Api.Models;
+using Ideas.Domain.Authorization.Exceptions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace Ideas.Api.Filters.Exceptions
+namespace Ideas.Api.Filters.Exceptions.Authorization
 {
     public class InvalidGrantTypeExceptionFilter : IExceptionFilter
     {

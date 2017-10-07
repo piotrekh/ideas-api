@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Ideas.Api.Exceptions;
 using Ideas.Domain.Authorization.Commands;
+using Ideas.Domain.Authorization.Exceptions;
 using Ideas.Domain.Authorization.Models;
 using Ideas.Domain.Common.Constants;
 using MediatR;

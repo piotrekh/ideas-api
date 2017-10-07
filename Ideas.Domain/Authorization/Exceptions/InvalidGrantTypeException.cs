@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ideas.Api.Exceptions
+namespace Ideas.Domain.Authorization.Exceptions
 {
     public class InvalidGrantTypeException : Exception
     {
