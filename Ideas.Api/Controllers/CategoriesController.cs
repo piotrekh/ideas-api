@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Ideas.Domain.Categories.Models;
+﻿using Ideas.Domain.Categories.Models;
 using Ideas.Domain.Categories.Queries;
 using Ideas.Domain.Common.Models;
 using MediatR;
@@ -15,13 +14,10 @@ namespace Ideas.Api.Controllers
     public class CategoriesController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public CategoriesController(IMediator mediator,
-            IMapper mapper)
+        public CategoriesController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         /// <summary>

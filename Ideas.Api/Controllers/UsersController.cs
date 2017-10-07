@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Ideas.Api.Dtos.Users.Commands;
+﻿using Ideas.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
-using Commands = Ideas.Domain.Users.Commands;
 
 namespace Ideas.Api.Controllers
 {
@@ -13,13 +11,10 @@ namespace Ideas.Api.Controllers
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator,
-            IMapper mapper)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
         }
 
         /// <summary>
@@ -27,10 +22,8 @@ namespace Ideas.Api.Controllers
         /// </summary>
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUser user)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUser command)
         {
-            var command = _mapper.Map<Commands.CreateUser>(user);
-
             await _mediator.Send(command);
             return NoContent();
         }
@@ -40,10 +33,8 @@ namespace Ideas.Api.Controllers
         /// </summary>
         [HttpPut("activation")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public async Task<IActionResult> ActivateUser([FromBody] ActivateUser activation)
+        public async Task<IActionResult> ActivateUser([FromBody] ActivateUser command)
         {
-            var command = _mapper.Map<Commands.ActivateUser>(activation);
-
             await _mediator.Send(command);
             return NoContent();
         }
