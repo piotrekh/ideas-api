@@ -2,8 +2,8 @@
 using Ideas.DataAccess.Entities;
 using Ideas.DataAccess.Entities.Identity;
 using Ideas.Domain.Settings;
-using Ideas.Domain.Users.Commands;
-using Ideas.Domain.Users.Models;
+using Ideas.Domain.Authorization.Commands;
+using Ideas.Domain.Authorization.Models;
 using Ideas.Domain.Users.Services;
 using MediatR;
 using Microsoft.Extensions.Options;
@@ -15,7 +15,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ideas.Domain.Users.CommandHandlers
+namespace Ideas.Domain.Authorization.CommandHandlers
 {
     public class GenerateAuthenticationTokensHandler : IAsyncRequestHandler<GenerateAuthenticationTokens, AuthenticationToken>
     {
@@ -62,7 +62,7 @@ namespace Ideas.Domain.Users.CommandHandlers
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
                 ExpiresIn = _authSettings.TokenExpiration * 60,
                 TokenType = "Bearer",
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken.ToString()
             };
         }
 

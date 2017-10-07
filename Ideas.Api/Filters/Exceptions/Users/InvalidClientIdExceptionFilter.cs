@@ -1,5 +1,5 @@
 ﻿using Ideas.Api.Models;
-using Ideas.Domain.Users.Exceptions;
+using Ideas.Domain.Authorization.Exceptions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 

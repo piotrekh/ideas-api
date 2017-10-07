@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using Ideas.Api.Dtos.Users.Models;
 using Ideas.Api.Exceptions;
+using Ideas.Domain.Authorization.Commands;
+using Ideas.Domain.Authorization.Models;
 using Ideas.Domain.Common.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
-using Commands = Ideas.Domain.Users.Commands;
-using UsersModels = Ideas.Domain.Users.Models;
 
 namespace Ideas.Api.Controllers
 {
@@ -34,24 +33,23 @@ namespace Ideas.Api.Controllers
         [ProducesResponseType(typeof(AuthenticationToken), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAccessToken([FromBody] TokenRequest request)
         {
-            UsersModels.AuthenticationToken commandResult = null;
+            AuthenticationToken token = null;
 
             if (request.GrantType?.ToLower() == GrantTypes.Password)
             {
-                var command = _mapper.Map<Commands.GetAccessToken>(request);
-                commandResult = await _mediator.Send(command);
+                var command = _mapper.Map<GetAccessToken>(request);
+                token = await _mediator.Send(command);
             }
             else if(request.GrantType?.ToLower() == GrantTypes.RefreshToken)
             {
-                var command = _mapper.Map<Commands.RefreshAccessToken>(request);
-                commandResult = await _mediator.Send(command);
+                var command = _mapper.Map<RefreshAccessToken>(request);
+                token = await _mediator.Send(command);
             }
             else
             {
                 throw new InvalidGrantTypeException();
             }
-
-            var token = _mapper.Map<AuthenticationToken>(commandResult);
+            
             return Ok(token);
         }
     }

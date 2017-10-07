@@ -1,7 +1,7 @@
 ﻿using Ideas.DataAccess;
-using Ideas.Domain.Users.Commands;
-using Ideas.Domain.Users.Exceptions;
-using Ideas.Domain.Users.Models;
+using Ideas.Domain.Authorization.Commands;
+using Ideas.Domain.Authorization.Exceptions;
+using Ideas.Domain.Authorization.Models;
 using Ideas.Domain.Users.Services;
 using MediatR;
 using System;

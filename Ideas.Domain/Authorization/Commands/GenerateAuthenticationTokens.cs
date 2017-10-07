@@ -1,10 +1,9 @@
 ﻿using Ideas.DataAccess.Entities;
 using Ideas.DataAccess.Entities.Identity;
-using Ideas.Domain.Users.Models;
+using Ideas.Domain.Authorization.Models;
 using MediatR;
-using System;
 
-namespace Ideas.Domain.Users.Commands
+namespace Ideas.Domain.Authorization.Commands
 {
     public class GenerateAuthenticationTokens : IRequest<AuthenticationToken>
     {

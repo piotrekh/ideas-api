@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ideas.Domain.Users.Exceptions
+namespace Ideas.Domain.Authorization.Exceptions
 {
     public class LoginFailedException : Exception
     {
