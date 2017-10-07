@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Ideas.Api.Dtos.Categories.Models;
-using Ideas.Api.Dtos.Common;
+using Ideas.Domain.Categories.Models;
+using Ideas.Domain.Categories.Queries;
+using Ideas.Domain.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
-using Queries = Ideas.Domain.Categories.Queries;
 
 namespace Ideas.Api.Controllers
 {
@@ -32,8 +32,7 @@ namespace Ideas.Api.Controllers
         [ProducesResponseType(typeof(ItemsResult<Category>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCategories()
         {
-            var queryResult = await _mediator.Send(new Queries.GetCategories());
-            var categories = _mapper.Map<ItemsResult<Category>>(queryResult);
+            var categories = await _mediator.Send(new GetCategories());
             return Ok(categories);
         }
     }
