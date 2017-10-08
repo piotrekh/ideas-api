@@ -8,7 +8,6 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace Ideas.UnitTests.DomainTests.Categories
@@ -24,7 +23,7 @@ namespace Ideas.UnitTests.DomainTests.Categories
             _mapper = MapperFactory.CreateMapper();
         }
 
-        [Fact(DisplayName = "GetCategoriesHandler_Should_ReturnAllCategories_When_CategoriesExist")]
+        [Fact(DisplayName = "Categories.GetCategoriesHandler_Should_ReturnAllCategories_When_CategoriesExist")]
         public void GetCategoriesHandler_Should_ReturnAllCategories_When_CategoriesExist()
         {
             #region Arrange
@@ -58,7 +57,7 @@ namespace Ideas.UnitTests.DomainTests.Categories
             #endregion
         }
 
-        [Fact(DisplayName = "GetCategoriesHandler_Should_ReturnEmptyList_When_NoCategoriesExist")]
+        [Fact(DisplayName = "Categories.GetCategoriesHandler_Should_ReturnEmptyList_When_NoCategoriesExist")]
         public void GetCategoriesHandler_Should_ReturnEmptyList_When_NoCategoriesExist()
         {
             #region Arrange

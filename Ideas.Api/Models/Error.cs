@@ -9,6 +9,7 @@
         InvalidClientId,
         LoginFailed,
         InvalidRefreshToken,
-        InvalidGrantType
+        InvalidGrantType,
+        CategoryAlreadyExists
     }
 }

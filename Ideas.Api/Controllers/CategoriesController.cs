@@ -1,5 +1,7 @@
-﻿using Ideas.Domain.Categories.Models;
+﻿using Ideas.Domain.Categories.Commands;
+using Ideas.Domain.Categories.Models;
 using Ideas.Domain.Categories.Queries;
+using Ideas.Domain.Common.Enums;
 using Ideas.Domain.Common.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +32,18 @@ namespace Ideas.Api.Controllers
         {
             var categories = await _mediator.Send(new GetCategories());
             return Ok(categories);
+        }
+
+        /// <summary>
+        /// Creates category and returns its data
+        /// </summary>
+        [HttpGet]
+        [Authorize(Roles = nameof(RoleName.Admin))]
+        [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategory command)
+        {
+            var category = await _mediator.Send(command);
+            return Ok(category);
         }
     }
 }

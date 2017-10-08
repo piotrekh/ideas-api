@@ -1,4 +1,5 @@
 ﻿using Ideas.Api.Filters.Exceptions.Authorization;
+using Ideas.Api.Filters.Exceptions.Categories;
 using Ideas.Api.Filters.Exceptions.Users;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -13,6 +14,9 @@ namespace Ideas.Api.Filters
             filterCollection.Add<InvalidGrantTypeExceptionFilter>();
             filterCollection.Add<InvalidRefreshTokenExceptionFilter>();
             filterCollection.Add<LoginFailedExceptionFilter>();
+
+            //Categories
+            filterCollection.Add<CategoryAlreadyExistsExceptionFilter>();
 
             //Users
             filterCollection.Add<CreateUserFailedExceptionFilter>();
