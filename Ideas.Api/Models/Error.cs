@@ -10,6 +10,7 @@
         LoginFailed,
         InvalidRefreshToken,
         InvalidGrantType,
-        CategoryAlreadyExists
+        CategoryAlreadyExists,
+        InvalidCategoryId
     }
 }

@@ -30,7 +30,7 @@ namespace Ideas.Api.Controllers
         [ProducesResponseType(typeof(ItemsResult<Category>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCategories()
         {
-            var categories = await _mediator.Send(new GetCategories());
+            ItemsResult<Category> categories = await _mediator.Send(new GetCategories());
             return Ok(categories);
         }
 
@@ -42,8 +42,21 @@ namespace Ideas.Api.Controllers
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategory command)
         {
-            var category = await _mediator.Send(command);
+            Category category = await _mediator.Send(command);
             return Ok(category);
+        }
+
+        /// <summary>
+        /// Returns all subcategories of the given category
+        /// </summary>
+        [HttpGet("{id}/subcategories")]
+        [Authorize]
+        [ProducesResponseType(typeof(ItemsResult<Subcategory>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetSubcategories([FromRoute] string id)
+        {
+            var query = new GetSubcategories() { CategoryId = id };
+            ItemsResult<Subcategory> result = await _mediator.Send(query);
+            return Ok(result);
         }
     }
 }

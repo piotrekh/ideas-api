@@ -8,6 +8,7 @@ namespace Ideas.Domain.Categories.Mapping
         public CategoriesMappings()
         {
             CreateMap<Entities.IdeaCategory, Models.Category>();
+            CreateMap<Entities.IdeaSubcategory, Models.Subcategory>();
         }
     }
 }
