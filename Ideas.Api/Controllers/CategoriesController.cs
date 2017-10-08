@@ -37,7 +37,7 @@ namespace Ideas.Api.Controllers
         /// <summary>
         /// Creates category and returns its data
         /// </summary>
-        [HttpGet]
+        [HttpPost]
         [Authorize(Roles = nameof(RoleName.Admin))]
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategory command)
