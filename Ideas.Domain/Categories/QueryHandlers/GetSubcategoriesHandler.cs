@@ -8,7 +8,7 @@ using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ideas.Domain.Categories.CommandHandlers
+namespace Ideas.Domain.Categories.QueryHandlers
 {
     public class GetSubcategoriesHandler : IRequestHandler<GetSubcategories, ItemsResult<Subcategory>>
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Ideas.DataAccess;
 using Ideas.DataAccess.Entities;
-using Ideas.Domain.Categories.CommandHandlers;
+using Ideas.Domain.Categories.QueryHandlers;
 using Ideas.Domain.Categories.Exceptions;
 using Ideas.Domain.Categories.Models;
 using Ideas.Domain.Categories.Queries;

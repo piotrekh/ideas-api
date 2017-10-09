@@ -61,6 +61,9 @@ namespace Ideas.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Returns ideas from given category
+        /// </summary>
         [HttpGet("{id}/ideas")]
         [Authorize]
         [ProducesResponseType(typeof(ItemsResult<Idea>), (int)HttpStatusCode.OK)]

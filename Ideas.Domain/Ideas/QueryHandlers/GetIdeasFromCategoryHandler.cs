@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Ideas.DataAccess;
+using Ideas.Domain.Categories.Exceptions;
 using Ideas.Domain.Common.Models;
 using Ideas.Domain.Ideas.Models;
 using Ideas.Domain.Ideas.Queries;
@@ -24,6 +25,10 @@ namespace Ideas.Domain.Ideas.QueryHandlers
         public ItemsResult<Idea> Handle(GetIdeasFromCategory message)
         {
             int categoryId = int.Parse(message.CategoryId);
+
+            //check if category with this id exists
+            if (!_uow.IdeaCategories.Any(x => x.Id == categoryId))
+                throw new InvalidCategoryIdException();
 
             var ideasEntities = _uow.Ideas.Where(x => x.IdeaCategoryId == categoryId)
                 .ToList();
