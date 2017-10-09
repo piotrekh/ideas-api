@@ -3,6 +3,8 @@ using Ideas.Domain.Categories.Models;
 using Ideas.Domain.Categories.Queries;
 using Ideas.Domain.Common.Enums;
 using Ideas.Domain.Common.Models;
+using Ideas.Domain.Ideas.Models;
+using Ideas.Domain.Ideas.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,6 +58,16 @@ namespace Ideas.Api.Controllers
         {
             var query = new GetSubcategories() { CategoryId = id };
             ItemsResult<Subcategory> result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/ideas")]
+        [Authorize]
+        [ProducesResponseType(typeof(ItemsResult<Idea>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetIdeasFromCategory([FromRoute] string id)
+        {
+            var query = new GetIdeasFromCategory() { CategoryId = id };
+            ItemsResult<Idea> result = await _mediator.Send(query);
             return Ok(result);
         }
     }
