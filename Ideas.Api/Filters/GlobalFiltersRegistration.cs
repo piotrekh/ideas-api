@@ -1,4 +1,5 @@
-﻿using Ideas.Api.Filters.Exceptions.Authorization;
+﻿using Ideas.Api.Filters.Exceptions;
+using Ideas.Api.Filters.Exceptions.Authorization;
 using Ideas.Api.Filters.Exceptions.Categories;
 using Ideas.Api.Filters.Exceptions.Users;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,6 +10,8 @@ namespace Ideas.Api.Filters
     {
         public static void AddGlobalExceptionFilters(this FilterCollection filterCollection)
         {
+            filterCollection.Add<ValidationExceptionFilter>();
+
             //Authorization
             filterCollection.Add<InvalidClientIdExceptionFilter>();
             filterCollection.Add<InvalidGrantTypeExceptionFilter>();

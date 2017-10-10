@@ -1,5 +1,6 @@
 ﻿using Ideas.Api.Models;
 using Ideas.Domain.Authorization.Exceptions;
+using Ideas.Domain.Common.Enums;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 

@@ -1,4 +1,4 @@
-﻿namespace Ideas.Api.Models
+﻿namespace Ideas.Domain.Common.Enums
 {
     public enum Error
     {
@@ -11,6 +11,7 @@
         InvalidRefreshToken,
         InvalidGrantType,
         CategoryAlreadyExists,
-        InvalidCategoryId
+        InvalidCategoryId,
+        InvalidCategoryName
     }
 }

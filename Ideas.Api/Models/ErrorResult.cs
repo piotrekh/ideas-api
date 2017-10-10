@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ideas.Domain.Common.Enums;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace Ideas.Api.Models
