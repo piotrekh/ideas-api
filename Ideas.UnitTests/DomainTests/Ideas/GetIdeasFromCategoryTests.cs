@@ -25,7 +25,7 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             _mapper = MapperFactory.CreateMapper();
         }
 
-        [Fact]
+        [Fact(DisplayName = "Ideas.GetIdeasFromCategoryHandler_Should_ReturnIdeas_When_CategoryExistsAndHasIdeas")]
         public void GetIdeasFromCategoryHandler_Should_ReturnIdeas_When_CategoryExistsAndHasIdeas()
         {
             #region Arrange
@@ -69,7 +69,7 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             #endregion
         }
 
-        [Fact]
+        [Fact(DisplayName = "Ideas.GetIdeasFromCategoryHandler_Should_ReturnEmptyIdeas_When_CategoryExistsButHasNoIdeas")]
         public void GetIdeasFromCategoryHandler_Should_ReturnEmptyIdeas_When_CategoryExistsButHasNoIdeas()
         {
             #region Arrange
@@ -98,7 +98,7 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             #endregion
         }
 
-        [Fact(DisplayName = "Categories.GetSubcategoriesHandler_Should_ThrowException_When_CategoryDoesNotExist")]
+        [Fact(DisplayName = "Ideas.GetIdeasFromCategoryHandler_Should_ThrowException_When_CategoryDoesNotExist")]
         public void GetIdeasFromCategoryHandler_Should_ThrowException_When_CategoryDoesNotExist()
         {
             #region Arrange

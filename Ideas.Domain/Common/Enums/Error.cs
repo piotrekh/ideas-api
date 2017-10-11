@@ -17,6 +17,7 @@
         InvalidToken,
         InvalidPassword,
         InvalidFirstName,
-        InvalidLastName
+        InvalidLastName,
+        InvalidSubcategoryId
     }
 }

@@ -20,6 +20,9 @@ namespace Ideas.Api.Filters
 
             //Categories
             filterCollection.Add<CategoryAlreadyExistsExceptionFilter>();
+            filterCollection.Add<InvalidCategoryIdExceptionFilter>();
+            filterCollection.Add<InvalidSubcategoryIdExceptionFilter>();
+            filterCollection.Add<SubcategoryNotFoundExceptionFilter>();
 
             //Users
             filterCollection.Add<CreateUserFailedExceptionFilter>();
