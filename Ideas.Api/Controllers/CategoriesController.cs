@@ -73,5 +73,18 @@ namespace Ideas.Api.Controllers
             ItemsResult<Idea> result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Returns ideas from given category and subcategory
+        /// </summary>
+        [HttpGet("{id}/subcategories/{subId}")]
+        [Authorize]
+        [ProducesResponseType(typeof(ItemsResult<Idea>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetIdeasFromSubcategory([FromRoute] string id, [FromRoute] string subId)
+        {
+            var query = new GetIdeasFromSubcategory() { CategoryId = id, SubcategoryId = subId };
+            ItemsResult<Idea> result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }
