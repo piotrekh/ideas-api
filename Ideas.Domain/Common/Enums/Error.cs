@@ -12,6 +12,11 @@
         InvalidGrantType,
         CategoryAlreadyExists,
         InvalidCategoryId,
-        InvalidCategoryName
+        InvalidCategoryName,
+        InvalidEmail,
+        InvalidToken,
+        InvalidPassword,
+        InvalidFirstName,
+        InvalidLastName
     }
 }
