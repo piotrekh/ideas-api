@@ -1,3 +1,5 @@
+--password for all test users is qwerty123
+
 MERGE dbo.AspNetUser as dest
 USING
 (
