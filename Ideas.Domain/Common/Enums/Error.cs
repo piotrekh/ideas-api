@@ -18,6 +18,7 @@
         InvalidPassword,
         InvalidFirstName,
         InvalidLastName,
-        InvalidSubcategoryId
+        InvalidSubcategoryId,
+        InvalidIdeaId
     }
 }
