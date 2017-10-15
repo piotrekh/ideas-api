@@ -13,7 +13,7 @@ namespace Ideas.Domain.Ideas.Mapping
             CreateMap<Entities.Idea, Models.IdeaDetails>()
                 .IncludeBase<Entities.Idea, Models.Idea>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.User))
-                .ForMember(dest => dest.Subcategories, opt => opt.MapFrom(src => src.Subcategories.Select(x => x.Subcategory.Name).ToList()));
+                .ForMember(dest => dest.Subcategories, opt => opt.MapFrom(src => src.Subcategories.Select(x => x.Subcategory)));
         }
     }
 }

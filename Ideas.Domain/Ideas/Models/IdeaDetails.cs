@@ -12,6 +12,6 @@ namespace Ideas.Domain.Ideas.Models
 
         public Category Category { get; set; }
 
-        public List<string> Subcategories { get; set; }
+        public List<Subcategory> Subcategories { get; set; }
     }
 }

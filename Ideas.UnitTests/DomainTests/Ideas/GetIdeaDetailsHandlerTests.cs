@@ -94,7 +94,7 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             idea.Id.ShouldBe(ideaEntity.Id.ToString());
             idea.Subcategories.ShouldNotBeEmpty();
             foreach (var subcategoryEntity in subcategoryEntities)
-                idea.Subcategories.FirstOrDefault(x => x == subcategoryEntity.Name).ShouldNotBeNull();
+                idea.Subcategories.FirstOrDefault(x => x.Id == subcategoryEntity.Id.ToString()).ShouldNotBeNull();
             idea.Title.ShouldBe(ideaEntity.Title);
 
             #endregion
