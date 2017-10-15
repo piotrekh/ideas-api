@@ -13,19 +13,19 @@ using Xunit;
 
 namespace Ideas.UnitTests.DomainTests.Ideas
 {
-    public class GetIdeaDetailsHandlerTests
+    public class GetIdeaDetailsTests
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
-        public GetIdeaDetailsHandlerTests()
+        public GetIdeaDetailsTests()
         {
             _uow = new InMemoryUnitOfWork();
             _mapper = MapperFactory.CreateMapper();
         }
 
-        [Fact(DisplayName = "Ideas.Handle_Should_ReturnIdeaDetails_When_IdeaExists")]
-        public void Handle_Should_ReturnIdeaDetails_When_IdeaExists()
+        [Fact(DisplayName = "Ideas.GetIdeaDetailsHandler_Should_ReturnIdeaDetails_When_IdeaExists")]
+        public void GetIdeaDetailsHandler_Should_ReturnIdeaDetails_When_IdeaExists()
         {
             #region Arrange            
 
@@ -100,8 +100,8 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             #endregion
         }
 
-        [Fact(DisplayName = "Ideas.Handle_Should_ThrowException_When_IdeaDoesNotExists")]
-        public void Handle_Should_ThrowException_When_IdeaDoesNotExists()
+        [Fact(DisplayName = "Ideas.GetIdeaDetailsHandler_Should_ThrowException_When_IdeaDoesNotExists")]
+        public void GetIdeaDetailsHandler_Should_ThrowException_When_IdeaDoesNotExists()
         {
             #region Arrange            
             
