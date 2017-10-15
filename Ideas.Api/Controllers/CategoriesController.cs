@@ -77,7 +77,7 @@ namespace Ideas.Api.Controllers
         /// <summary>
         /// Returns ideas from given category and subcategory
         /// </summary>
-        [HttpGet("{id}/subcategories/{subId}")]
+        [HttpGet("{id}/subcategories/{subId}/ideas")]
         [Authorize]
         [ProducesResponseType(typeof(ItemsResult<Idea>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetIdeasFromSubcategory([FromRoute] string id, [FromRoute] string subId)
