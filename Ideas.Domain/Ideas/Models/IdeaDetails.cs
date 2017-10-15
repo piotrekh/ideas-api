@@ -1,4 +1,5 @@
-﻿using Ideas.Domain.Users.Models;
+﻿using Ideas.Domain.Categories.Models;
+using Ideas.Domain.Users.Models;
 using System.Collections.Generic;
 
 namespace Ideas.Domain.Ideas.Models
@@ -9,9 +10,7 @@ namespace Ideas.Domain.Ideas.Models
 
         public string Description { get; set; }
 
-        public string CategoryId { get; set; }
-
-        public string Category { get; set; }
+        public Category Category { get; set; }
 
         public List<string> Subcategories { get; set; }
     }

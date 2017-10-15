@@ -86,8 +86,9 @@ namespace Ideas.UnitTests.DomainTests.Ideas
             idea.Author.ShouldNotBeNull();
             idea.Author.FirstName.ShouldBe(ideaEntity.User.FirstName);
             idea.Author.LastName.ShouldBe(ideaEntity.User.LastName);
-            idea.Category.ShouldBe(categoryEntity.Name);
-            idea.CategoryId.ShouldBe(categoryEntity.Id.ToString());
+            idea.Category.ShouldNotBeNull();
+            idea.Category.Name.ShouldBe(categoryEntity.Name);
+            idea.Category.Id.ShouldBe(categoryEntity.Id.ToString());
             idea.CreatedDate.ShouldBe(ideaEntity.CreatedDate);
             idea.Description.ShouldBe(ideaEntity.Description);
             idea.Id.ShouldBe(ideaEntity.Id.ToString());
