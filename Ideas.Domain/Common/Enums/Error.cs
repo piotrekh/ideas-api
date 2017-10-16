@@ -20,6 +20,8 @@
         InvalidLastName,
         InvalidSubcategoryId,
         InvalidIdeaId,
-        AccessDenied
+        AccessDenied,
+        InvalidIdeaTitle,
+        TooManySubcategories
     }
 }

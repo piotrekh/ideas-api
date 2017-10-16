@@ -1,4 +1,5 @@
 ﻿using Ideas.DataAccess.Entities;
+using Ideas.DataAccess.Entities.Identity;
 using Ideas.DataAccess.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace Ideas.DataAccess
     public class UnitOfWork : IUnitOfWork
     {
         protected readonly IdeasDbContext _dbContext;
+
+
+        public DbSet<User> Users => _dbContext.Users;
+
 
         public DbSet<IdeaCategory> IdeaCategories => _dbContext.IdeaCategories;
 

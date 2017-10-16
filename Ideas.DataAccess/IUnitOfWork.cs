@@ -1,4 +1,5 @@
 ﻿using Ideas.DataAccess.Entities;
+using Ideas.DataAccess.Entities.Identity;
 using Ideas.DataAccess.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -7,6 +8,9 @@ namespace Ideas.DataAccess
 {
     public interface IUnitOfWork
     {
+        DbSet<User> Users { get; }
+
+
         DbSet<IdeaCategory> IdeaCategories { get; }
 
         DbSet<IdeaSubcategory> IdeaSubcategories { get; }

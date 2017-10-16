@@ -29,7 +29,7 @@ namespace Ideas.Api.Controllers
         public async Task<IActionResult> GetIdeaDetails([FromRoute] string id)
         {
             var query = new GetIdeaDetails() { IdeaId = id };
-            var result = await _mediator.Send(query);
+            IdeaDetails result = await _mediator.Send(query);
             return Ok(result);
         }
 
@@ -43,6 +43,17 @@ namespace Ideas.Api.Controllers
             var command = new DeleteIdea() { IdeaId = id };
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Creates a new idea
+        /// </summary>
+        [HttpPost]
+        [ProducesResponseType(typeof(IdeaDetails), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateIdea([FromBody] CreateIdea command)
+        {
+            IdeaDetails result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
