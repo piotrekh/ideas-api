@@ -26,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -133,6 +134,8 @@ namespace Ideas.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1.0", new Info { Title = "Ideas API", Version = "v1.0" });
+                var filePath = Path.Combine(AppContext.BaseDirectory, "Ideas.Api.xml");
+                c.IncludeXmlComments(filePath);
 
                 c.DescribeAllEnumsAsStrings();
 
