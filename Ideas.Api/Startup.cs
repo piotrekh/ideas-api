@@ -78,12 +78,15 @@ namespace Ideas.Api
             services.AddAutoMapper();
 
             // Add framework services.
-            services.AddMvc(options =>
+            services.AddMvcCore(options =>
             {
                 options.Filters.AddGlobalExceptionFilters();
                 options.Filters.Add(new ProducesAttribute("application/json"));
                 options.Filters.Add(new ConsumesAttribute("application/json"));
             })
+            .AddApiExplorer()
+            .AddFormatterMappings()
+            .AddJsonFormatters()
             .AddJsonOptions(options =>
             {
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());

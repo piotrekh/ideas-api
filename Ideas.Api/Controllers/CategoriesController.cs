@@ -15,7 +15,7 @@ namespace Ideas.Api.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class CategoriesController : Controller
+    public class CategoriesController : ControllerBase
     {
         private readonly IMediator _mediator;
 

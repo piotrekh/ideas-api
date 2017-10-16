@@ -12,7 +12,7 @@ namespace Ideas.Api.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
