@@ -1,10 +1,10 @@
-﻿namespace Ideas.DataAccess.Transactions
+﻿using System;
+
+namespace Ideas.DataAccess.Transactions
 {
-    public interface ITransaction
+    public interface ITransaction : IDisposable
     {
         void Commit();
-
-        void Dispose();
 
         void Rollback();
     }

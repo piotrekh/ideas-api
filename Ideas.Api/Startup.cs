@@ -162,6 +162,7 @@ namespace Ideas.Api
             containerBuilder.RegisterModule<DomainServicesModule>();
             containerBuilder.RegisterModule<MailingModule>();
             containerBuilder.RegisterModule<ValidatorsModule>();
+            containerBuilder.RegisterModule<ContextModule>();
 
             //populate autofac container with Asp.Net dependencies
             containerBuilder.Populate(services);

@@ -29,6 +29,7 @@ namespace Ideas.Api.Filters
             filterCollection.Add<IdeaNotFoundExceptionFilter>();
 
             //Users
+            filterCollection.Add<AccessDeniedExceptionFilter>();
             filterCollection.Add<CreateUserFailedExceptionFilter>();
             filterCollection.Add<EmailUnconfirmedExceptionFilter>();                        
             filterCollection.Add<ResetPasswordFailedExceptionFilter>();

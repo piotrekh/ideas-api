@@ -1,4 +1,5 @@
-﻿using Ideas.Domain.Ideas.Models;
+﻿using Ideas.Domain.Ideas.Commands;
+using Ideas.Domain.Ideas.Models;
 using Ideas.Domain.Ideas.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +31,18 @@ namespace Ideas.Api.Controllers
             var query = new GetIdeaDetails() { IdeaId = id };
             var result = await _mediator.Send(query);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Deletes idea
+        /// </summary>
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<IActionResult> DeleteIdea([FromRoute] string id)
+        {
+            var command = new DeleteIdea() { IdeaId = id };
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

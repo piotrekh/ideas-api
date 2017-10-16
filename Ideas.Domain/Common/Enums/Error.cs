@@ -19,6 +19,7 @@
         InvalidFirstName,
         InvalidLastName,
         InvalidSubcategoryId,
-        InvalidIdeaId
+        InvalidIdeaId,
+        AccessDenied
     }
 }
