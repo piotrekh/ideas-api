@@ -54,6 +54,7 @@ namespace Ideas.Api
             services.AddOptions();
             services.Configure<MailingSettings>(Configuration.GetSection("Mailing"));
             services.Configure<AuthSettings>(Configuration.GetSection("AuthSettings"));
+            services.Configure<IdeasSettings>(Configuration.GetSection("IdeasSettings"));
 
             services.AddDbContext<IdeasDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IdeasDb")));

@@ -1,4 +1,5 @@
-﻿using Ideas.Domain.Ideas.Commands;
+﻿using Ideas.Domain.Common.Models;
+using Ideas.Domain.Ideas.Commands;
 using Ideas.Domain.Ideas.Models;
 using Ideas.Domain.Ideas.Queries;
 using MediatR;
@@ -30,6 +31,18 @@ namespace Ideas.Api.Controllers
         {
             var query = new GetIdeaDetails() { IdeaId = id };
             IdeaDetails result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Returns predefined number of newest ideas
+        /// </summary>
+        [HttpGet("newest")]
+        [ProducesResponseType(typeof(ItemsResult<Idea>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetNewestIdeas()
+        {
+            var query = new GetNewestIdeas();
+            ItemsResult<Idea> result = await _mediator.Send(query);
             return Ok(result);
         }
 
