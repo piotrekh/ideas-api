@@ -89,6 +89,8 @@ namespace Ideas.Api
             .AddJsonFormatters()
             .AddJsonOptions(options =>
             {
+                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+                options.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ssZ";
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             });
 

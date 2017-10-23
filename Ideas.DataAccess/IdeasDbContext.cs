@@ -1,4 +1,5 @@
-﻿using Ideas.DataAccess.Entities;
+﻿using Ideas.DataAccess.EFHelpers;
+using Ideas.DataAccess.Entities;
 using Ideas.DataAccess.Entities.Identity;
 using Ideas.DataAccess.EntitiesConfig;
 using Ideas.DataAccess.EntitiesConfig.Identity;
@@ -6,6 +7,7 @@ using Ideas.DataAccess.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Ideas.DataAccess
 {
@@ -46,6 +48,13 @@ namespace Ideas.DataAccess
             builder.AddConfiguration<AssignedIdeaSubcategory, AssignedIdeaSubcategoryConfig>();
             builder.AddConfiguration<ApiClient, ApiClientConfig>();
             builder.AddConfiguration<RefreshToken, RefreshTokenConfig>();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ReplaceService<IEntityMaterializerSource, CustomEntityMaterializerSource>();
+
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
