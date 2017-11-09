@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="dbup-add-migration" Version="1.2.0" />
     <PackageReference Include="dbup4-sqlserver" Version="4.0.0-beta0003" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
