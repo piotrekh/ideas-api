@@ -92,7 +92,12 @@ namespace Ideas.Api
                 options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
                 options.SerializerSettings.DateFormatString = "yyyy-MM-ddTHH:mm:ssZ";
                 options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-            });
+            })
+            .AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(new string[] { JwtBearerDefaults.AuthenticationScheme }).RequireAuthenticatedUser().Build();
+            })
+            .AddDataAnnotations();
 
             services.AddCors(options =>
             {
@@ -131,10 +136,10 @@ namespace Ideas.Api
                     ClockSkew = TimeSpan.FromMinutes(0)
                 };
             });
-            services.AddAuthorization(options =>
-            {
-                options.DefaultPolicy = new AuthorizationPolicyBuilder(new string[] { JwtBearerDefaults.AuthenticationScheme }).RequireAuthenticatedUser().Build();
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.DefaultPolicy = new AuthorizationPolicyBuilder(new string[] { JwtBearerDefaults.AuthenticationScheme }).RequireAuthenticatedUser().Build();
+            //});
 
             services.AddSwaggerGen(c =>
             {
