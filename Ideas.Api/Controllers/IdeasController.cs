@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Ideas.Api.Controllers
 {
     [Route("/api/v{version:ApiVersion}/[controller]")]
-    [ApiVersion("1.0")]
+    [ApiVersion("1")]
     [Authorize]
     public class IdeasController : ControllerBase
     {

@@ -136,14 +136,10 @@ namespace Ideas.Api
                     ClockSkew = TimeSpan.FromMinutes(0)
                 };
             });
-            //services.AddAuthorization(options =>
-            //{
-            //    options.DefaultPolicy = new AuthorizationPolicyBuilder(new string[] { JwtBearerDefaults.AuthenticationScheme }).RequireAuthenticatedUser().Build();
-            //});
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info { Title = "Ideas API", Version = "v1.0" });
+                c.SwaggerDoc("v1", new Info { Title = "Ideas API", Version = "v1" });
                 var filePath = Path.Combine(AppContext.BaseDirectory, "Ideas.Api.xml");
                 c.IncludeXmlComments(filePath);
 
@@ -201,7 +197,7 @@ namespace Ideas.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Ideas API v1.0");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ideas API v1");
                 c.ShowRequestHeaders();
                 c.ShowJsonEditor();
             });
