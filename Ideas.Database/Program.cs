@@ -14,8 +14,12 @@ namespace Ideas.Database
                 .AddJsonFile("appsettings.json");
             var config = builder.Build();
 
-            string connectionString = config["connectionString"];
+            string connectionString = config.GetConnectionString("IdeasDb");
 
+            //create the database if it doesn't exist
+            EnsureDatabase.For.SqlDatabase(connectionString);
+
+            //execute migration scripts
             var upgrader =
                 DeployChanges.To
                     .SqlDatabase(connectionString)
